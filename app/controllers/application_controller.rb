@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   def index
     @ingredients = Ingredient.all
+    @recipes = Recipe.all
     render 'home/index'
   end
 end

@@ -1,4 +1,4 @@
 class RecipeLineItem < ApplicationRecord
   belongs_to :recipe
-  has_one :ingredient
+  belongs_to :ingredient
 end

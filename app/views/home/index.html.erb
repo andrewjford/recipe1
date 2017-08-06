@@ -11,3 +11,18 @@
   </li>
 <% end %>
 </ul>
+
+<h2>Recipes</h2>
+<ul>
+  <% @recipes.each do |recipe| %>
+  <li>
+    <%= recipe.name %>
+    <%= recipe.description %>
+    <ul>
+      <% recipe.recipe_line_items.each do |line_item| %>
+        <li><%= line_item.quantity %> <%= line_item.ingredient.name %></li>
+      <% end %>
+    </ul>
+  </li>
+  <% end %>
+</ul>

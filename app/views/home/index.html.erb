@@ -2,3 +2,12 @@
 
 <button>Recipes</button>
 <button>Ingredients</button>
+
+<h2>Ingredients</h2>
+<ul>
+<% @ingredients.each do |ingredient| %>
+  <li>
+    <%= ingredient.name %>
+  </li>
+<% end %>
+</ul>

@@ -2,21 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 import Recipes from './containers/Recipes'
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { fetchRecipes } from './actions/recipeActions'
 
 class App extends Component {
 
-  constructor(){
-    super();
-
-    this.state = {
-      recipes: []
-    }
-  }
-
   componentDidMount() {
-    fetch('http://localhost:3001/recipes')
-    .then(response => response.json())
-    .then(array => this.setState({...this.state, recipes: array}))
+    this.props.fetchRecipes();
   }
 
   render() {
@@ -25,7 +17,7 @@ class App extends Component {
         <div className="App-header">
           <h2>Welcome to React</h2>
         </div>
-        <Recipes recipes={this.state.recipes}/>
+        <Recipes recipes={this.props.recipes}/>
       </div>
     );
   }
@@ -37,4 +29,9 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    fetchRecipes: fetchRecipes
+  }, dispatch)
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);

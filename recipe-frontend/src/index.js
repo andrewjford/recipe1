@@ -4,12 +4,19 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import recipeReducer from './reducers/recipeReducer'
+import thunk from 'redux-thunk';
+import { combineReducers } from 'redux';
+
+const rootReducer = combineReducers({
+  recipes: recipeReducer,
+});
 
 const store = createStore(
-  recipeReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  rootReducer, applyMiddleware(thunk),
+  
 );
 
 ReactDOM.render(

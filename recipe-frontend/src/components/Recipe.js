@@ -1,5 +1,7 @@
 import React from 'react';
 
-export const Recipe = (props) => {
-  return <li>{props.name} {props.description}</li>
+const Recipe = (props) => {
+  return <li>{props.recipe.name} {props.recipe.description}</li>
 }
+
+export default Recipe;

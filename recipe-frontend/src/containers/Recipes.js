@@ -1,6 +1,5 @@
 import React from 'react';
 import Recipe from '../components/Recipe'
-import fetch from 'isomorphic-fetch'
 
 class Recipes extends React.Component {
 

@@ -10,7 +10,7 @@ class Recipes extends React.Component {
     })
 
     return <div>
-      <h1>Recipes container</h1>
+      <h1>Recipes</h1>
       {recipes}
     </div>
   }

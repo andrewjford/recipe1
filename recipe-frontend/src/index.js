@@ -7,16 +7,18 @@ import registerServiceWorker from './registerServiceWorker';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import recipeReducer from './reducers/recipeReducer'
+import ingredientsReducer from './reducers/ingredientsReducer'
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
 
 const rootReducer = combineReducers({
   recipes: recipeReducer,
+  ingredients: ingredientsReducer,
 });
 
 const store = createStore(
   rootReducer, applyMiddleware(thunk),
-  
+
 );
 
 ReactDOM.render(

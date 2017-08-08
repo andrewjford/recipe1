@@ -27,7 +27,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
     recipes: state.recipes,
-    ingredients: state.ingredients,
+    ingredients: state.ingredients.list,
   }
 }
 

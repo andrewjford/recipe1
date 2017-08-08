@@ -1,0 +1,3 @@
+- expand api beyond get index
+  - add ingredients form
+  - setup csrf

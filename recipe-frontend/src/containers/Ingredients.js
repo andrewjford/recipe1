@@ -1,5 +1,6 @@
 import React from 'react';
 import Ingredient from '../components/Ingredient';
+import IngredientForm from '../components/IngredientForm';
 
 export default class Ingredients extends React.Component {
 
@@ -10,7 +11,10 @@ export default class Ingredients extends React.Component {
 
     return <div>
       <h1>Ingredients</h1>
-      {ingredients}
+      <ul>
+        {ingredients}
+      </ul>
+      <IngredientForm />
     </div>
   }
 }

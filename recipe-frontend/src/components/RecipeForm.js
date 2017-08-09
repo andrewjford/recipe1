@@ -1,5 +1,9 @@
 import React from 'react';
 import RecipeLineItemInput from './RecipeLineItemInput';
+import {bindActionCreators} from 'redux';
+import {connect} from 'react-redux';
+import {createRecipe} from '../actions/recipeActions';
+
 
 class RecipeForm extends React.Component {
 
@@ -8,13 +12,15 @@ class RecipeForm extends React.Component {
 
     this.state = {
       name: "",
-      lines: [{quantity: "", ingredient: ""}],
+      description: "blah",
+      recipe_line_items_attributes: [{quantity: "", ingredient_attributes: {name: ""}}],
     }
 
     this.handleNameChange = this.handleNameChange.bind(this);
     this.handleQuantityChange = this.handleQuantityChange.bind(this);
     this.handleIngredientChange = this.handleIngredientChange.bind(this);
     this.addIngredientLine = this.addIngredientLine.bind(this);
+    this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
 
   handleNameChange(event) {
@@ -22,36 +28,38 @@ class RecipeForm extends React.Component {
   }
 
   handleQuantityChange(event) {
-    let newLines = [...this.state.lines];
+    let newLines = [...this.state.recipe_line_items_attributes];
     const index = Number(event.target.id[1]);
     newLines[index] = {...newLines[index], quantity: event.target.value}
-    this.setState({...this.state, lines: newLines})
+    this.setState({...this.state, recipe_line_items_attributes: newLines})
   }
 
   handleIngredientChange(event) {
-    let newLines = [...this.state.lines];
+    let newLines = [...this.state.recipe_line_items_attributes];
     const index = Number(event.target.id[1]);
-    newLines[index] = {...newLines[index], ingredient: event.target.value}
-    this.setState({...this.state, lines: newLines})
+    newLines[index] = {...newLines[index], ingredient_attributes: {name: event.target.value}}
+    this.setState({...this.state, recipe_line_items_attributes: newLines})
   }
 
   handleFormSubmit(event) {
     event.preventDefault();
+
+    this.props.createRecipe(this.state)
   }
 
   addIngredientLine() {
     this.setState({
-      lines: [...this.state.lines, {quantity: "", ingredient: ""}]
+      recipe_line_items_attributes: [...this.state.recipe_line_items_attributes, {quantity: "", ingredient_attributes: {name: ""}}]
     })
   }
 
   render() {
 
-    const line_items = this.state.lines.map((line, index) => {
+    const line_items = this.state.recipe_line_items_attributes.map((line, index) => {
       return <tr key={index}>
         <td><RecipeLineItemInput id={"q"+index} value={line.quantity}
           handleChange={this.handleQuantityChange}/></td>
-        <td><RecipeLineItemInput id={"i"+index} value={line.ingredient}
+        <td><RecipeLineItemInput id={"i"+index} value={line.ingredient_attributes.name}
           handleChange={this.handleIngredientChange}/></td>
       </tr>
     })
@@ -76,4 +84,10 @@ class RecipeForm extends React.Component {
   }
 }
 
-export default RecipeForm;
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    createRecipe: createRecipe
+  }, dispatch);
+}
+
+export default connect(null, mapDispatchToProps)(RecipeForm);

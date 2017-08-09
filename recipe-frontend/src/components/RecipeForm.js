@@ -47,7 +47,8 @@ class RecipeForm extends React.Component {
     this.props.createRecipe(this.state)
   }
 
-  addIngredientLine() {
+  addIngredientLine(event) {
+    event.preventDefault();
     this.setState({
       recipe_line_items_attributes: [...this.state.recipe_line_items_attributes, {quantity: "", ingredient_attributes: {name: ""}}]
     })

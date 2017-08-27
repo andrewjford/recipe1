@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include ActionController::HttpAuthentication::Basic::ControllerMethods
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
-  before_action :authenticate_user_from_token, except: [:token, :index]
+  before_action :authenticate_user_from_token, except: [:token]
 
   def current_user
     @current_user ||= User.find(session[:user_id]) if session[:user_id]

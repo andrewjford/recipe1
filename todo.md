@@ -1,3 +1,7 @@
+- Adding User
+  - properly restrict access on front end based on token??
+  - create action and reducer for login submit
+  - add signup to front end
 - expand api beyond get index
   - add ingredients form
   - setup csrf

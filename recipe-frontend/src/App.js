@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchRecipes } from './actions/recipeActions'
 import { fetchIngredients } from './actions/ingredientsActions'
+import Login from './containers/Login'
 
 class App extends Component {
 
@@ -17,6 +18,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Login/>
         <Recipes recipes={this.props.recipes}/>
         <Ingredients ingredients={this.props.ingredients} />
       </div>

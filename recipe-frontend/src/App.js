@@ -9,6 +9,7 @@ import Ingredients from './containers/Ingredients';
 import { fetchRecipes } from './actions/recipeActions'
 import { fetchIngredients } from './actions/ingredientsActions'
 import Login from './containers/Login'
+import Signup from './components/Signup'
 import Main from './containers/Main'
 
 class App extends Component {
@@ -22,6 +23,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Main} />
         </div>

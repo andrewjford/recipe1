@@ -10,6 +10,7 @@ import recipeReducer from './reducers/recipeReducer'
 import ingredientsReducer from './reducers/ingredientsReducer'
 import thunk from 'redux-thunk';
 import { combineReducers } from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const rootReducer = combineReducers({
   recipes: recipeReducer,
@@ -17,8 +18,7 @@ const rootReducer = combineReducers({
 });
 
 const store = createStore(
-  rootReducer, applyMiddleware(thunk),
-
+  rootReducer, composeWithDevTools(applyMiddleware(thunk),)
 );
 
 ReactDOM.render(

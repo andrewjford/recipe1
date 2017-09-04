@@ -21,7 +21,7 @@ class Main extends React.Component {
   }
 
   render() {
-    if(!this.props.user.token){
+    if(!this.props.user.session){
       return <Redirect to='/login'/>;
     }
 

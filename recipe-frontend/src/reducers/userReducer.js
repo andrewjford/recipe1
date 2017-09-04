@@ -1,5 +1,5 @@
 export default function userReducer(
-  state = {input: {email: "", password: ""}}, action) {
+  state = {session: !!sessionStorage.jwt, input: {email: "", password: ""}}, action) {
   switch(action.type) {
     case "FETCH_TOKEN":
       return {...state, token: action.payload.token}
@@ -9,6 +9,8 @@ export default function userReducer(
       return {...state, input: {...state.input, password: action.payload}}
     case "SET_LOGGED_IN":
       return {...state, loggedIn: action.payload}
+    case "LOG_IN_SUCCESS":
+      return {...state, session: !!sessionStorage.jwt}
     default:
       return state;
   }

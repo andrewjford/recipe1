@@ -5,3 +5,7 @@
 - expand api beyond get index
   - add ingredients form
   - setup csrf
+- refactor redirect out of redux reducer!
+- refactor React components
+- delete auth_token from db after conversion
+- logout token

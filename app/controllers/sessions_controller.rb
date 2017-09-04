@@ -1,21 +1,21 @@
 class SessionsController < ApplicationController
-  def new
+  skip_before_action :authenticate
 
+  def new
   end
 
   def create
-    user = User.find_by(email: params[:email])
+    user = User.find_by(email: auth_params[:email])
 
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-      redirect_to '/'
+    if user && user.authenticate(auth_params[:password])
+      jwt = Auth.issue({user: user.id})
+      render json: {jwt: jwt}
     else
-      redirect_to '/login'
     end
   end
 
-  def destroy
-    session.delete :user_id
-    redirect_to '/login'
+  private
+  def auth_params
+    params.require(:auth).permit(:email, :password)
   end
 end

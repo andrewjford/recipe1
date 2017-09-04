@@ -5,7 +5,7 @@ export function fetchIngredients(token) {
   let config = {
     method: 'GET',
     headers: {
-      'Authorization': `Token token=${token}`
+      'Authorization': `Bearer ${sessionStorage.jwt}`
     },
   }
 
@@ -37,7 +37,7 @@ export function createIngredient(input, token) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Token token=${token}`
+        'Authorization': `Bearer ${sessionStorage.jwt}`
       },
       body: JSON.stringify({name: input})
     })

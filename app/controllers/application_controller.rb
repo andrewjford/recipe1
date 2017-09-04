@@ -4,14 +4,19 @@ class ApplicationController < ActionController::Base
   include ActionController::HttpAuthentication::Basic::ControllerMethods
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
-  before_action :authenticate_user_from_token, except: [:token]
+  # before_action :authenticate_user_from_token, except: [:token]
+  before_action :authenticate
 
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  def logged_in?
+    !!current_user
   end
 
-  def authorize_user
-    redirect_to '/login' unless current_user
+  def current_user
+    @current_user ||= User.find(auth["user"]) if auth_present?
+  end
+
+  def authenticate
+    render json: {error: "unauthorized"}, status: 401 unless logged_in?
   end
 
   def index
@@ -37,5 +42,17 @@ class ApplicationController < ActionController::Base
     unless authenticate_with_http_token { |token, options| User.find_by(auth_token: token) }
       render json: { error: 'Bad Token'}, status: 401
     end
+  end
+
+  def auth_present?
+    !!request.env.fetch("HTTP_AUTHORIZATION","").scan(/Bearer/).flatten.first
+  end
+
+  def auth
+    Auth.decode(token)
+  end
+
+  def token
+    request.env["HTTP_AUTHORIZATION"].scan(/Bearer (.*)$/).flatten.last
   end
 end

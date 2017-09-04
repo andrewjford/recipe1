@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { Redirect, Link } from 'react-router-dom';
 
 import { fetchToken,
+  loginUser,
   changeEmailInput,
   changePasswordInput } from '../actions/userActions';
 
@@ -24,7 +25,7 @@ class Login extends React.Component {
       email: this.props.userForm.email,
       password: this.props.userForm.password
     }
-    this.props.fetchToken(formInput);
+    this.props.loginUser(formInput);
     this.setState({redirect: true});
   }
 
@@ -37,7 +38,7 @@ class Login extends React.Component {
   }
 
   render(){
-    if (this.props.user.loggedIn){
+    if (this.props.user.session){
       return <Redirect to='/'/>;
     }
 
@@ -65,6 +66,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     fetchToken: fetchToken,
+    loginUser: loginUser,
     changeEmailInput: changeEmailInput,
     changePasswordInput: changePasswordInput,
   }, dispatch)

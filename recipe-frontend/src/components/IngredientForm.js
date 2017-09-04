@@ -14,7 +14,7 @@ class IngredientForm extends React.Component {
 
   handleFormSubmit(event){
     event.preventDefault();
-    this.props.createIngredient(this.props.ingredientInput);
+    this.props.createIngredient(this.props.ingredientInput, this.props.user.token);
     this.props.clearInput();
   }
 
@@ -34,6 +34,7 @@ class IngredientForm extends React.Component {
 const mapStateToProps = (state) => {
   return {
     ingredientInput: state.ingredients.input,
+    user: state.user
   }
 }
 

@@ -12,10 +12,14 @@ export function fetchIngredients(token) {
   return (dispatch) => {
     return fetch('http://localhost:3001/ingredients', config)
       .then(response => {return response.json()})
-      .then(ingredients => dispatch({
-        type: 'FETCH_INGREDIENTS',
-        ingredients: ingredients
-      }))
+      .then(json => {
+        if(!json.error){
+          dispatch({
+            type: 'FETCH_INGREDIENTS',
+            ingredients: json
+          })
+        }
+      })
   }
 
 }
@@ -27,12 +31,13 @@ export function changeIngredientInput(newInput) {
   }
 }
 
-export function createIngredient(input) {
+export function createIngredient(input, token) {
   return (dispatch) => {
     return fetch('http://localhost:3001/ingredients', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Token token=${token}`
       },
       body: JSON.stringify({name: input})
     })

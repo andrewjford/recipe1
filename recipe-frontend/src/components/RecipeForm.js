@@ -44,7 +44,7 @@ class RecipeForm extends React.Component {
   handleFormSubmit(event) {
     event.preventDefault();
 
-    this.props.createRecipe(this.state)
+    this.props.createRecipe(this.state, this.props.user.token);
   }
 
   addIngredientLine(event) {
@@ -85,10 +85,16 @@ class RecipeForm extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     createRecipe: createRecipe
   }, dispatch);
 }
 
-export default connect(null, mapDispatchToProps)(RecipeForm);
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeForm);

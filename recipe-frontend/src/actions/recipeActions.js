@@ -17,27 +17,24 @@ export function fetchRecipes(token) {
           dispatch({
             type: 'FETCH_RECIPES',
             recipes: json
-          });
+          })
         }
       })
   }
 }
 
-export function createRecipe(input) {
+export function createRecipe(input, token) {
   return (dispatch) => {
     return fetch('http://localhost:3001/recipes', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Token token=${token}`
       },
       body: JSON.stringify({recipe: input})
     })
     .then(response => response.json())
-    .then(json => {
-      if(!json.error){
-        dispatch(addRecipe(json));
-      }
-    })
+    .then(json => dispatch(addRecipe(json)))
   }
 }
 

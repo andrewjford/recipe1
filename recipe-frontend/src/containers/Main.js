@@ -24,7 +24,6 @@ class Main extends React.Component {
     if(!this.props.user.token){
       return <Redirect to='/login'/>;
     }
-    debugger;
 
     return (
       <div className="Main">

@@ -1,14 +1,25 @@
 import fetch from 'isomorphic-fetch';
 
-export function fetchRecipes() {
+export function fetchRecipes(token) {
+
+  let config = {
+    method: 'GET',
+    headers: {
+      'Authorization': `Token token=${token}`
+    },
+  }
 
   return (dispatch) => {
-    return fetch('http://localhost:3001/recipes')
+    return fetch('http://localhost:3001/recipes', config)
       .then(response => {return response.json()})
-      .then(recipes => dispatch({
-        type: 'FETCH_RECIPES',
-        recipes: recipes
-      }))
+      .then(json => {
+        if(!json.error){
+          dispatch({
+            type: 'FETCH_RECIPES',
+            recipes: json
+          });
+        }
+      })
   }
 }
 
@@ -22,7 +33,11 @@ export function createRecipe(input) {
       body: JSON.stringify({recipe: input})
     })
     .then(response => response.json())
-    .then(json => dispatch(addRecipe(json)))
+    .then(json => {
+      if(!json.error){
+        dispatch(addRecipe(json));
+      }
+    })
   }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Redirect, Link } from 'react-router-dom';
 
 import Recipes from './Recipes'
 import Ingredients from './Ingredients';
@@ -10,13 +11,25 @@ import { fetchIngredients } from '../actions/ingredientsActions'
 class Main extends React.Component {
 
   componentDidMount() {
-    this.props.fetchRecipes();
-    this.props.fetchIngredients();
+    this.props.fetchRecipes(this.props.user.token);
+    this.props.fetchIngredients(this.props.user.token);
+  }
+
+  doIt = (event) => {
+    this.props.fetchRecipes(this.props.user.token);
+    this.props.fetchIngredients(this.props.user.token);
   }
 
   render() {
+    if(!this.props.user.token){
+      return <Redirect to='/login'/>;
+    }
+    debugger;
+
     return (
       <div className="Main">
+        <button onClick={this.doIt}>Load</button>
+        <Link to='/login'>Login</Link>
         <Recipes recipes={this.props.recipes}/>
         <Ingredients ingredients={this.props.ingredients} />
       </div>
@@ -29,6 +42,7 @@ const mapStateToProps = (state) => {
   return {
     recipes: state.recipes,
     ingredients: state.ingredients.list,
+    user: state.user,
   }
 }
 

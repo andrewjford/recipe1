@@ -14,11 +14,6 @@ import Main from './containers/Main'
 
 class App extends Component {
 
-  componentDidMount() {
-    this.props.fetchRecipes();
-    this.props.fetchIngredients();
-  }
-
   render() {
     return (
       <Router>
@@ -39,10 +34,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({
-    fetchRecipes: fetchRecipes,
-    fetchIngredients: fetchIngredients,
-  }, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

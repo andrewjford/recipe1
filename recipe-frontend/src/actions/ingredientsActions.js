@@ -1,9 +1,16 @@
 import fetch from 'isomorphic-fetch';
 
-export function fetchIngredients() {
+export function fetchIngredients(token) {
+
+  let config = {
+    method: 'GET',
+    headers: {
+      'Authorization': `Token token=${token}`
+    },
+  }
 
   return (dispatch) => {
-    return fetch('http://localhost:3001/ingredients')
+    return fetch('http://localhost:3001/ingredients', config)
       .then(response => {return response.json()})
       .then(ingredients => dispatch({
         type: 'FETCH_INGREDIENTS',

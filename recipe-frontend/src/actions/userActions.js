@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import sessionApi from '../api/SessionApi';
 
-export function loginUser(credentials){
+export function loginUser(credentials) {
   return function(dispatch) {
     return sessionApi.login(credentials)
       .then(response => {
@@ -19,6 +19,15 @@ export function loginUser(credentials){
 export function loginSuccess() {
   return {
     type: 'LOG_IN_SUCCESS'
+  }
+}
+
+export function logoutUser() {
+  return function(dispatch){
+    sessionStorage.removeItem('jwt');
+    dispatch({
+      type: 'LOG_OUT'
+    })
   }
 }
 

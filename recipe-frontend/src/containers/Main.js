@@ -4,9 +4,10 @@ import { bindActionCreators } from 'redux';
 import { Redirect, Link } from 'react-router-dom';
 
 import Recipes from './Recipes'
-import Ingredients from './Ingredients';
+import Ingredients from './Ingredients'
 import { fetchRecipes } from '../actions/recipeActions'
 import { fetchIngredients } from '../actions/ingredientsActions'
+import { logoutUser } from '../actions/userActions'
 
 class Main extends React.Component {
 
@@ -15,9 +16,9 @@ class Main extends React.Component {
     this.props.fetchIngredients(this.props.user.token);
   }
 
-  doIt = (event) => {
-    this.props.fetchRecipes(this.props.user.token);
-    this.props.fetchIngredients(this.props.user.token);
+  handleLogout = (event) => {
+    event.preventDefault();
+    this.props.logoutUser();
   }
 
   render() {
@@ -27,8 +28,8 @@ class Main extends React.Component {
 
     return (
       <div className="Main">
-        <button onClick={this.doIt}>Load</button>
         <Link to='/login'>Login</Link>
+        <a href="" onClick={this.handleLogout}>Logout</a>
         <Recipes recipes={this.props.recipes}/>
         <Ingredients ingredients={this.props.ingredients} />
       </div>
@@ -49,6 +50,7 @@ const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
     fetchRecipes: fetchRecipes,
     fetchIngredients: fetchIngredients,
+    logoutUser: logoutUser,
   }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Main);

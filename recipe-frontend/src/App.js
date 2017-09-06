@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { BrowserRouter as Router, Route} from 'react-router-dom';
 
-import Recipes from './containers/Recipes'
-import Ingredients from './containers/Ingredients';
-import { fetchRecipes } from './actions/recipeActions'
-import { fetchIngredients } from './actions/ingredientsActions'
 import Login from './containers/Login'
 import Signup from './components/Signup'
 import Main from './containers/Main'

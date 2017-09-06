@@ -11,6 +11,8 @@ export default function userReducer(
       return {...state, loggedIn: action.payload}
     case "LOG_IN_SUCCESS":
       return {...state, session: !!sessionStorage.jwt}
+    case "LOG_OUT":
+      return {...state, session: false}
     default:
       return state;
   }

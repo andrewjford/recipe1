@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route} from 'react-router-dom';
 import Login from './containers/Login'
 import Signup from './components/Signup'
 import Main from './containers/Main'
+import Navbar from './components/Navbar'
 
 class App extends Component {
 
@@ -13,6 +14,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
+          <Navbar />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/" component={Main} />

@@ -28,8 +28,6 @@ class Main extends React.Component {
 
     return (
       <div className="Main">
-        <Link to='/login'>Login</Link>
-        <a href="" onClick={this.handleLogout}>Logout</a>
         <Recipes recipes={this.props.recipes}/>
         <Ingredients ingredients={this.props.ingredients} />
       </div>

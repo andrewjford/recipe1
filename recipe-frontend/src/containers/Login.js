@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect, Link } from 'react-router-dom';
 
-import { fetchToken,
+import {
   loginUser,
   changeEmailInput,
   changePasswordInput } from '../actions/userActions';
@@ -43,7 +43,6 @@ class Login extends React.Component {
     }
 
     return <form onSubmit={this.handleSubmit}>
-      <Link to='/'>Home</Link>
       <h1>Login</h1>
       <label>Email </label>
       <input type="text" onChange={this.handleEmailChange}/>
@@ -65,7 +64,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    fetchToken: fetchToken,
     loginUser: loginUser,
     changeEmailInput: changeEmailInput,
     changePasswordInput: changePasswordInput,

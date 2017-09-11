@@ -1,18 +1,13 @@
 class UsersController < ApplicationController
   skip_before_action :authenticate, only: [:create]
 
-  def new
-
-  end
-
   def create
     user = User.new(user_params)
-    binding.pry
     if user.save
-      session[:user_id] = user.id
-      redirect_to '/'
+      jwt = Auth.issue({user: user.id})
+      render json: {jwt: jwt}
     else
-      redirect_to '/signup'
+      render json: {error: user.errors}
     end
   end
 

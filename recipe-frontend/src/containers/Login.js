@@ -60,6 +60,7 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    user: state.user,
     userForm: state.user.input
   }
 }

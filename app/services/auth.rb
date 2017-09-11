@@ -3,6 +3,7 @@ class Auth
   @auth_secret = ENV['AUTH_SECRET']
 
   def self.issue(payload)
+    binding.pry
     JWT.encode(
       payload,
       @auth_secret,

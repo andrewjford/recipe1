@@ -6,7 +6,9 @@ import { Redirect, Link } from 'react-router-dom';
 import {
   loginUser,
   changeEmailInput,
-  changePasswordInput } from '../actions/userActions';
+  changePasswordInput,
+  clearLoginInput
+ } from '../actions/userActions';
 
 class Login extends React.Component {
   constructor() {
@@ -26,6 +28,7 @@ class Login extends React.Component {
       password: this.props.userForm.password
     }
     this.props.loginUser(formInput);
+    this.props.clearLoginInput();
     this.setState({redirect: true});
   }
 
@@ -57,7 +60,6 @@ class Login extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
     userForm: state.user.input
   }
 }
@@ -67,6 +69,7 @@ const mapDispatchToProps = (dispatch) => {
     loginUser: loginUser,
     changeEmailInput: changeEmailInput,
     changePasswordInput: changePasswordInput,
+    clearLoginInput: clearLoginInput,
   }, dispatch)
 }
 

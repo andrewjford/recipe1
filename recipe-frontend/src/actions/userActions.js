@@ -43,3 +43,31 @@ export function changeEmailInput(newInput) {
     payload: newInput,
   }
 }
+
+export function clearLoginInput() {
+  return {
+    type: 'CLEAR_LOGIN_INPUT'
+  }
+}
+
+export function changeConfirmInput(newInput) {
+  return {
+    type: 'CHANGE_CONFIRM_INPUT',
+    payload: newInput,
+  }
+}
+
+export function signupUser(credentials) {
+  return function(dispatch) {
+    return sessionApi.signup(credentials)
+      .then(response => {
+        if(response.jwt){
+          sessionStorage.setItem('jwt', response.jwt);
+          dispatch(loginSuccess());
+        }
+      })
+      .catch(error => {
+        throw(error);
+      })
+  }
+}

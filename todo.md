@@ -9,3 +9,5 @@
 - refactor React components
 - delete auth_token from db after conversion
 - logout token
+- move any local react states to redux
+- switch to have rails serve react app

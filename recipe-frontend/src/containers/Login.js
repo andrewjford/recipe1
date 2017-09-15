@@ -14,8 +14,6 @@ class Login extends React.Component {
   constructor() {
     super();
 
-    this.state = {redirect: false}
-
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -29,7 +27,6 @@ class Login extends React.Component {
     }
     this.props.loginUser(formInput);
     this.props.clearLoginInput();
-    this.setState({redirect: true});
   }
 
   handleEmailChange(event){

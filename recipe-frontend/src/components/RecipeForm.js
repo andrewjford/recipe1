@@ -45,6 +45,15 @@ class RecipeForm extends React.Component {
     event.preventDefault();
 
     this.props.createRecipe(this.state, this.props.user.token);
+    this.clearInput();
+  }
+
+  clearInput() {
+    this.setState({
+      name: "",
+      description: "blah",
+      recipe_line_items_attributes: [{quantity: "", ingredient_attributes: {name: ""}}],
+    });
   }
 
   addIngredientLine(event) {
@@ -93,7 +102,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({
-    createRecipe: createRecipe
+    createRecipe: createRecipe,
   }, dispatch);
 }
 

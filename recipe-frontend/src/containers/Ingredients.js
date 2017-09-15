@@ -11,7 +11,7 @@ export default class Ingredients extends React.Component {
 
     return <div>
       <h1>Ingredients</h1>
-      <ul>
+      <ul className="fade-in">
         {ingredients}
       </ul>
       <IngredientForm />

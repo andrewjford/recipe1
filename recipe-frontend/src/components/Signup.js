@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 import {
   signupUser,
@@ -43,6 +44,10 @@ class Signup extends React.Component {
   }
 
   render(){
+    if (this.props.user.session){
+      return <Redirect to='/'/>;
+    }
+
     return <form onSubmit={this.handleSubmit}>
       <h1>Signup</h1>
       <label>Email </label>

@@ -1,5 +1,5 @@
 .App {
-  
+
 }
 
 .App-logo {
@@ -21,4 +21,22 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.fade-in {
+    animation: fadein 1s;
+}
+@keyframes fadein {
+    from {
+        opacity:0;
+    }
+    to {
+        opacity:1;
+    }
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

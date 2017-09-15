@@ -1,6 +1,7 @@
 import React from 'react';
 import Recipe from '../components/Recipe'
 import RecipeForm from '../components/RecipeForm'
+import Loading from '../components/Loading'
 
 class Recipes extends React.Component {
 
@@ -12,7 +13,10 @@ class Recipes extends React.Component {
 
     return <div>
       <h1>Recipes</h1>
-      <ul>
+
+      <Loading loaded={!!this.props.recipes} />
+
+      <ul className="fade-in">
         {recipes}
       </ul>
       <RecipeForm />

@@ -7,8 +7,10 @@ import {
   loginUser,
   changeEmailInput,
   changePasswordInput,
-  clearLoginInput
+  clearLoginInput,
+  clearFlash
  } from '../actions/userActions';
+ import FlashMessage from '../components/FlashMessage'
 
 class Login extends React.Component {
   constructor() {
@@ -17,6 +19,10 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.clearFlash();
   }
 
   handleSubmit(event) {
@@ -44,6 +50,7 @@ class Login extends React.Component {
 
     return <form onSubmit={this.handleSubmit}>
       <h1>Login</h1>
+      <FlashMessage />
       <label>Email </label>
       <input type="text" onChange={this.handleEmailChange}/>
       <br/>
@@ -68,6 +75,7 @@ const mapDispatchToProps = (dispatch) => {
     changeEmailInput: changeEmailInput,
     changePasswordInput: changePasswordInput,
     clearLoginInput: clearLoginInput,
+    clearFlash: clearFlash,
   }, dispatch)
 }
 

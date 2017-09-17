@@ -35,6 +35,10 @@
     }
 }
 
+.flash-message {
+  color: red;
+}
+
 .flex-container {
   display: flex;
   flex-direction: column;

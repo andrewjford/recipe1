@@ -1,5 +1,5 @@
 export default function userReducer(
-  state = {session: !!sessionStorage.jwt,
+  state = {session: !!sessionStorage.jwt, messages: "",
     input: {email: "", password: "", confirm: ""}}, action) {
   switch(action.type) {
     case "FETCH_TOKEN":
@@ -18,6 +18,10 @@ export default function userReducer(
       return {...state, session: false}
     case "CLEAR_LOGIN_INPUT":
       return {...state, input: {...state.input, password: ""}}
+    case "NEW_FLASH_MESSAGE":
+      return {...state, messages: action.payload}
+    case "CLEAR_FLASH_MESSAGE":
+      return {...state, messages: ""}
     default:
       return state;
   }

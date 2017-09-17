@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Redirect } from 'react-router-dom';
 
+import FlashMessage from './FlashMessage';
 import {
   signupUser,
   changeEmailInput,
   changePasswordInput,
   changeConfirmInput,
-  clearLoginInput
+  clearLoginInput,
+  clearFlash
  } from '../actions/userActions';
 
 class Signup extends React.Component {
@@ -19,6 +21,10 @@ class Signup extends React.Component {
     this.handleEmailChange = this.handleEmailChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleConfirmChange = this.handleConfirmChange.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.props.clearFlash();
   }
 
   handleSubmit(event) {
@@ -50,6 +56,7 @@ class Signup extends React.Component {
 
     return <form onSubmit={this.handleSubmit}>
       <h1>Signup</h1>
+      <FlashMessage />
       <label>Email </label>
       <input type="text" onChange={this.handleEmailChange}/>
       <br/>
@@ -78,6 +85,7 @@ const mapDispatchToProps = (dispatch) => {
     changePasswordInput: changePasswordInput,
     changeConfirmInput: changeConfirmInput,
     clearLoginInput: clearLoginInput,
+    clearFlash: clearFlash,
   }, dispatch)
 }
 

@@ -8,6 +8,9 @@ export function loginUser(credentials) {
           sessionStorage.setItem('jwt', response.jwt);
           dispatch(loginSuccess());
         }
+        else if(response.errors) {
+          dispatch(flashError(response.errors));
+        }
       })
       .catch(error => {
         throw(error);
@@ -65,9 +68,25 @@ export function signupUser(credentials) {
           sessionStorage.setItem('jwt', response.jwt);
           dispatch(loginSuccess());
         }
+        else if(response.errors){
+          dispatch(flashError(response.errors));
+        }
       })
       .catch(error => {
         throw(error);
       })
+  }
+}
+
+export function flashError(messages) {
+  return {
+    type: 'NEW_FLASH_MESSAGE',
+    payload: messages
+  }
+}
+
+export function clearFlash() {
+  return {
+    type: 'CLEAR_FLASH_MESSAGE'
   }
 }

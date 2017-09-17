@@ -10,6 +10,7 @@ class SessionsController < ApplicationController
       jwt = Auth.issue({user: user.id})
       render json: {jwt: jwt}
     else
+      render json: {errors: {"Improper credentials": "Invalid username or password"}}, status: 401
     end
   end
 
